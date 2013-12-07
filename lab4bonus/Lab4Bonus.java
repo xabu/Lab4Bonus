@@ -8,7 +8,7 @@ package lab4bonus;
 
 /**
  *
- * @author User
+ * @author Stephen Wen
  */
 public class Lab4Bonus {
 
