@@ -29,10 +29,10 @@ public class Coil {
         direction = dir;
         cw = clock;
   
-        points = new Vec[16 * n / (2 * Math.Pi())];
-        dtheta = length / points.length;
+        points = new Vec[16 * n ];
+        double dtheta = length / points.length;
         for (int i = 0; i < points.length; i++) {
-            theta = dtheta * i;
+            double theta = dtheta * i;
             points[i] = new Vec(Math.cos(theta), Math.sin(theta), theta);
         }
 
