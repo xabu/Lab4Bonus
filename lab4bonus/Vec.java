@@ -11,7 +11,10 @@ package lab4bonus;
  * @author Stephen Wen
  */
 public class Vec {
-    //the array that will store the values of the vector. For example, vector holds {x,y,z} in R3
+    /*
+    The array that will store the values of the vector. 
+    For example, vector holds {x,y,z} in R3
+    */
     double[] vector;
     /**
      * creates a default 0 vector in R3
@@ -39,7 +42,9 @@ public class Vec {
      * @param dimensions The dimensions of the vector
      */
     public Vec (int dimensions){
+        //Sets the size of vector to fit the dimensions of the situation
         vector = new double [dimensions];
+        //sets all values to 0, creating a 0 vector
         for(int i = 0; i < dimensions; i++){
             vector[i] = 0;
         }
@@ -51,6 +56,11 @@ public class Vec {
      * @return A new vector that is equal to u x v
      */
     public static Vec cross (Vec u, Vec v){
+        /*
+        The cross product values were solved generally by hand.
+        This solution was found and is used to simplify the computations made 
+        by the computer.
+        */
         return new Vec(
                 u.getY()*v.getZ() - u.getZ()*v.getY(),
                 u.getZ()*v.getX()-u.getX()*v.getZ(), 
@@ -63,6 +73,10 @@ public class Vec {
      * @return the dot product
      */
     public static double dot(Vec u, Vec v){
+        /*
+        The dot product between two vectors is a scalar given by the sum of the
+        products of each components of the two vectors.
+        */
         double dot = 0;
         if(u.getSize() == v.getSize()){
             for(int i = 0; i < u.getSize(); i++){
@@ -78,6 +92,10 @@ public class Vec {
      * @return A new vector equal to d*v.
      */
     public static Vec scale(double d, Vec v){
+        /*
+        The product of a sclar and a vector is a vector with each component 
+        multiplied by the scalar.
+        */
         Vec ret = new Vec(v.getSize());
         for(int i = 0; i < v.getSize();i++){
             ret.vector[i] = v.vector[i]*d;
@@ -91,6 +109,11 @@ public class Vec {
      * @return The sum of u and v
      */
     public static Vec add(Vec u, Vec v){
+        /*
+        The sum of two vectors is given by a new vector with each component
+        being equal to the sum of the corresponding components of the two 
+        vectors that were summed.
+        */
         if(u.getSize() != v.getSize())
             return new Vec();
         Vec ret = new Vec(u.getSize());
@@ -106,6 +129,11 @@ public class Vec {
      * @return The difference between u and v
      */
     public static Vec subtract(Vec u, Vec v){
+        /*
+        The difference is equal to the sum of one vector and the negative of 
+        the other vector. The negative of a vector is a scalar multiple of the 
+        vector given by -1*v. 
+        */
         Vec negv = scale(-1,v);
         return add(u,negv);
     }
@@ -114,6 +142,10 @@ public class Vec {
      * @return The magnitude, or norm of the vector.
      */
     public double norm(){
+        /*
+        The norm of a vector is given by the root of the internal dot product
+        of the vector.
+        */
         return Math.sqrt(dot(this,this));
     }
     /**
