@@ -88,6 +88,31 @@ public class Vec {
         return ret;
     }
     /**
+     * Gives the sum of two vectors, u + v.
+     * @param u The first vector
+     * @param v The second vector
+     * @return The sum of u and v
+     */
+    public static Vec add(Vec u, Vec v){
+        if(u.getSize() != v.getSize())
+            return new Vec();
+        Vec ret = new Vec(u.getSize());
+        for(int i = 0;i<ret.getSize();i++){
+            ret.vector[i] = u.vector[i]+v.vector[i];
+        }
+        return ret;
+    }
+    /**
+     * Gives the difference between two vectors, u - v.
+     * @param u The first vector
+     * @param v The second vector
+     * @return The difference between u and v
+     */
+    public static Vec subtract(Vec u, Vec v){
+        Vec negv = scale(-1,v);
+        return add(u,negv);
+    }
+    /**
      * Calculates the norm of this vector.
      * @return The magnitude, or norm of the vector.
      */
