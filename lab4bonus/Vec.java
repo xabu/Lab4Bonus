@@ -15,7 +15,7 @@ public class Vec {
     The array that will store the values of the vector. 
     For example, vector holds {x,y,z} in R3
     */
-    double[] vector;
+    private double[] vector;
     /**
      * creates a default 0 vector in R3
      */
