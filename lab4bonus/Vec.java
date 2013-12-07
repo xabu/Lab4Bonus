@@ -7,11 +7,11 @@
 package lab4bonus;
 
 /**
- *
+ * This is a class to define a vector
  * @author Stephen Wen
  */
 public class Vec {
-    //the array that will store the values of the vector. Vector holds {x,y,z}
+    //the array that will store the values of the vector. For example, vector holds {x,y,z} in R3
     double[] vector;
     /**
      * creates a default 0 vector in R3
@@ -51,13 +51,10 @@ public class Vec {
      * @return A new vector that is equal to u x v
      */
     public static Vec cross (Vec u, Vec v){
-        if(u.getSize() == 3 && v.getSize() == 3){
-            return new Vec(
-                    u.vector[1]*v.vector[2] - u.vector[2]*v.vector[1],
-                    u.vector[2]*v.vector[0]-u.vector[0]*v.vector[2], 
-                    u.vector[0]*v.vector[1]-u.vector[1]*v.vector[0]);
-        }
-        return new Vec();
+        return new Vec(
+                u.getY()*v.getZ() - u.getZ()*v.getY(),
+                u.getZ()*v.getX()-u.getX()*v.getZ(), 
+                u.getX()*v.getY()-u.getY()*v.getX());
     }
     /**
      * Calculates the dot product of two vectors
@@ -69,7 +66,7 @@ public class Vec {
         double dot = 0;
         if(u.getSize() == v.getSize()){
             for(int i = 0; i < u.getSize(); i++){
-                dot+= u.vector[i]*v.vector[1];
+                dot+= u.vector[i]*v.vector[i];
             }
         }
         return dot;
@@ -125,5 +122,35 @@ public class Vec {
      */
     public int getSize(){
         return vector.length;
+    }
+    /**
+     * Returns the x value of a vector in 3 space
+     * @return The x component
+     */
+    public double getX(){
+        if(getSize() == 3)
+            return vector[0];
+        else
+            return 0;
+    }
+    /**
+     * Returns the y value of a vector in 3 space
+     * @return The y component
+     */
+    public double getY(){
+        if(getSize() == 3)
+            return vector[1];
+        else
+            return 0;
+    }
+    /**
+     * Returns the z value of a vector in 3 space
+     * @return The z component
+     */
+    public double getZ(){
+        if(getSize() == 3)
+            return vector[2];
+        else
+            return 0;
     }
 }
