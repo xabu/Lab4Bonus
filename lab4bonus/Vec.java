@@ -185,4 +185,8 @@ public class Vec {
         else
             return 0;
     }
+    
+    public void setX(double x) { vector[0] = x; }
+    public void setY(double y) { vector[1] = y; }
+    public void setZ(double z) { vector[2] = z; }
 }
