@@ -20,16 +20,16 @@ public class Coil {
     public boolean cw;
     public Vec[] points;
 
-    public Coil (int n, double l, double r, Vec pos, Vec dir, boolean clock) {
+    public Coil (int N, double l, double r, Vec pos, Vec dir, boolean clock) {
 
-        turns = n;
+        turns = N;
         length = l;
         radius = r;
         position = pos;
         direction = dir;
         cw = clock;
   
-        points = new Vec[16 * n ];
+        points = new Vec[16 * turns ];
         double dtheta = length / points.length;
         for (int i = 0; i < points.length; i++) {
             double theta = dtheta * i;
