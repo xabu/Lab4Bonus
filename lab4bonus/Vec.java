@@ -189,4 +189,22 @@ public class Vec {
     public void setX(double x) { vector[0] = x; }
     public void setY(double y) { vector[1] = y; }
     public void setZ(double z) { vector[2] = z; }
+    
+    public void rotate (double theta, double phi) {
+        // prefetch the existing vector
+        double x = getX();
+        double y = getY();
+        double z = getZ();
+        // apply x rotation matrix
+        setY(y*Math.cos(theta) - z*Math.sin(theta));
+        setZ(y*Math.sin(theta) + z*Math.cos(theta));
+        
+        // prefetch the new vector
+        x = getX();
+        y = getY();
+        z = getZ();
+        // apply y rotation matrix
+        setX(x*Math.cos(theta)+z*Math.sin(theta));
+        setZ(-x*Math.sin(theta)+z*Math.cos(theta));
+    }
 }

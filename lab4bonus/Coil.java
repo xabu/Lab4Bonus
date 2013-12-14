@@ -19,8 +19,9 @@ public class Coil {
     public boolean cw;
     public Vec[] points;
     public Vec[] wires;
+    public Vec[] wirepoints;
 
-    public Coil (int N, double l, double r, Vec pos, Vec dir, boolean clock) {
+    public Coil (int N, double l, double r, Vec pos, double theta, double phi, boolean clock) {
 
         turns = N;
         length = l;
@@ -28,38 +29,44 @@ public class Coil {
         position = pos;
         cw = clock;
   
-        points = new Vec[16 * turns ];
-        double dtheta = length / points.length;
+        points = new Vec[16 * turns ]; // Create 16 points along each turn
+        double dheight = length / points.length; // Set the change in height as the length divided by the number of points
+        double dtheta = 2*Math.PI*16; // Set the angle incremen tto be 1/16th of a full turn
         for (int i = 0; i < points.length; i++) {
-            double theta = dtheta * i;
-            points[i] = new Vec(Math.cos(theta), Math.sin(theta), theta);
+            double height = dheight * i;
+            double arg = dtheta * i;
+            points[i] = new Vec(Math.cos(arg), Math.sin(arg), height); // Calculate the point on the helix
         }
-        double theta = 0;
-        double phi = 0;
-        rotate(theta, phi);
         
+        // Generate wires
         wires = new Vec[points.length - 1];
+        wirepoints = new Vec[points.length - 1];
         for (int i = 0; i < points.length - 1; i++) {
+            // Create a wire element by subtracting consecutive coil points
             wires[i] = Vec.subtract(points[i+1], points[i]);
+            // Note the location of the midpoint of the wire
+            wirepoints[i] = Vec.scale(0.5, Vec.add(points[i], points[i+1]));
         }
+        
+        // Rotate the coil by two rotations (any orientation in R3)
+        theta = 0;
+        phi = 0;
+        rotate(theta, phi);
+        translate(pos);
     }
 
     private void rotate (double theta, double phi) {
-        // prefetch the existing vector
-        double x = position.getX();
-        double y = position.getY();
-        double z = position.getZ();
-        // apply x rotation matrix
-        position.setY(y*Math.cos(theta) - z*Math.sin(theta));
-        position.setZ(y*Math.sin(theta) + z*Math.cos(theta));
-        
-        // prefetch the new vector
-        x = position.getX();
-        y = position.getY();
-        z = position.getZ();
-        // apply y rotation matrix
-        position.setX(x*Math.cos(theta)+z*Math.sin(theta));
-        position.setZ(-x*Math.sin(theta)+z*Math.cos(theta));
+        for (int i = 0; i < wires.length; i++) {
+            wires[i].rotate(theta, phi);
+            wirepoints[i].rotate(theta,phi);
+        }
+    }
+    
+    private void translate (Vec pos) { // translate all points
+        for (int i = 0; i < wires.length; i++) { // 
+            Vec.add(wires[i], pos);
+            Vec.add(wirepoints[i], pos);
+        }
     }
 
 }
