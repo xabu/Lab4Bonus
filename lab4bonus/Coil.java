@@ -13,6 +13,7 @@ package lab4bonus;
 public class Coil {
 
     public int turns;
+    public int pPerLoop = 16;
     public double length;
     public double radius;
     public Vec position;
@@ -29,9 +30,9 @@ public class Coil {
         position = pos;
         cw = clock;
   
-        points = new Vec[16 * turns ]; // Create 16 points along each turn
+        points = new Vec[pPerLoop * turns ]; // Create pPerLoop points along each turn
         double dheight = length / points.length; // Set the change in height as the length divided by the number of points
-        double dtheta = 2*Math.PI*16; // Set the angle incremen tto be 1/16th of a full turn
+        double dtheta = 2*Math.PI*pPerLoop; // Set the angle increment to be 1/pPerLoop revs, to allow for easy changing of accuracy of sim.
         for (int i = 0; i < points.length; i++) {
             double height = dheight * i;
             double arg = dtheta * i;
