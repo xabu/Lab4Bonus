@@ -139,6 +139,7 @@ public class Lab4Bonus {
         out.close();
         }
         catch (IOException e) {
+            System.out.println("The output to file failed");
         }
     }
 
