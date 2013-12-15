@@ -12,6 +12,7 @@ package lab4bonus;
  */
 public class Coil {
 
+    public double current;
     public int turns;
     public int pPerLoop = 16;
     public double length;
@@ -22,8 +23,9 @@ public class Coil {
     public Vec[] wires;
     public Vec[] wirepoints;
 
-    public Coil (int N, double l, double r, Vec pos, double theta, double phi, boolean clock) {
+    public Coil (double I, int N, double l, double r, Vec pos, double theta, double phi, boolean clock) {
 
+        current = I;
         turns = N;
         length = l;
         radius = r;
@@ -55,6 +57,11 @@ public class Coil {
         rotate(theta, phi);
         translate(pos);
     }
+    
+    public double getcurrent () {return current;}
+    
+    public Vec getwire (int i) { return wires[i]; }
+    public Vec getwirepoint (int i) {return wirepoints[i]; }
 
     private void rotate (double theta, double phi) {
         for (int i = 0; i < wires.length; i++) {
