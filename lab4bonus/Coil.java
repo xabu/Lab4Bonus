@@ -34,11 +34,11 @@ public class Coil {
   
         points = new Vec[pPerLoop * turns ]; // Create pPerLoop points along each turn
         double dheight = length / points.length; // Set the change in height as the length divided by the number of points
-        double dtheta = 2*Math.PI*pPerLoop; // Set the angle increment to be 1/pPerLoop revs, to allow for easy changing of accuracy of sim.
+        double dtheta = 2*Math.PI / pPerLoop; // Set the angle increment to be 1/pPerLoop revs, to allow for easy changing of accuracy of sim.
         for (int i = 0; i < points.length; i++) {
             double height = dheight * i;
             double arg = dtheta * i;
-            points[i] = new Vec(Math.cos(arg), Math.sin(arg), height); // Calculate the point on the helix
+            points[i] = new Vec(radius*Math.cos(arg), radius*Math.sin(arg), height); // Calculate the point on the helix
         }
         
         // Generate wires
@@ -59,6 +59,7 @@ public class Coil {
     }
     
     public double getcurrent () {return current;}
+    public int getppc() {return wires.length;}
     
     public Vec getwire (int i) { return wires[i]; }
     public Vec getwirepoint (int i) {return wirepoints[i]; }
@@ -72,8 +73,8 @@ public class Coil {
     
     private void translate (Vec pos) { // translate all points
         for (int i = 0; i < wires.length; i++) { // 
-            Vec.add(wires[i], pos);
-            Vec.add(wirepoints[i], pos);
+            wires[i] = Vec.add(wires[i], pos);
+            wirepoints[i] = Vec.add(wirepoints[i], pos);
         }
     }
 

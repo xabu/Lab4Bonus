@@ -63,8 +63,8 @@ public class Vec {
         */
         return new Vec(
                 u.getY()*v.getZ() - u.getZ()*v.getY(),
-                u.getZ()*v.getX()-u.getX()*v.getZ(), 
-                u.getX()*v.getY()-u.getY()*v.getX());
+                u.getZ()*v.getX() - u.getX()*v.getZ(), 
+                u.getX()*v.getY() - u.getY()*v.getX());
     }
     /**
      * Calculates the dot product of two vectors
