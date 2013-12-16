@@ -52,9 +52,8 @@ public class Coil {
         }
         
         // Rotate the coil by two rotations (any orientation in R3)
-        theta = 0;
-        phi = 0;
         rotate(theta, phi);
+        // Translate the entire coil
         translate(pos);
     }
     
@@ -72,8 +71,7 @@ public class Coil {
     }
     
     private void translate (Vec pos) { // translate all points
-        for (int i = 0; i < wires.length; i++) { // 
-            wires[i] = Vec.add(wires[i], pos);
+        for (int i = 0; i < wires.length; i++) {
             wirepoints[i] = Vec.add(wirepoints[i], pos);
         }
     }

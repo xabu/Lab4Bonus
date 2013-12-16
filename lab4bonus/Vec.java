@@ -207,4 +207,11 @@ public class Vec {
         setX(x*Math.cos(theta)+z*Math.sin(theta));
         setZ(-x*Math.sin(theta)+z*Math.cos(theta));
     }
+    
+    public void print () {
+        System.out.println(getX());
+        System.out.println(getY());
+        System.out.println(getZ());
+        System.out.println();
+    }
 }

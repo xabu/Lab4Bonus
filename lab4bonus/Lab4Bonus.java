@@ -22,7 +22,7 @@ public class Lab4Bonus {
     public static void main(String[] args) {
         
         // set up cube length and lattice density
-        double length = 0.30;
+        double length = 0.50;
         int density = 20;
         double side = length / density;
         
@@ -41,7 +41,7 @@ public class Lab4Bonus {
         int N1 = 320;
         double l1 = 0.0214;
         double r1 = 0.076;
-        Vec pos1 = new Vec(0.15,0.15,0.15);
+        Vec pos1 = new Vec(0.25, 0.25, 0.15);
         double theta1 = 0;
         double phi1 = 0;
         boolean clock1 = true;
@@ -54,13 +54,16 @@ public class Lab4Bonus {
         int N2 = 320;
         double l2 = 0.0214;
         double r2 = 0.076;
-        Vec pos2 = new Vec(0.5, 0.5, 0.8);
+        Vec pos2 = new Vec(0.25, 0.25, 0.35);
         double theta2 = 0;
         double phi2 = 0;
         boolean clock2 = true;
         
         // Create second coil
         Coil coil2 = new Coil (i2, N2, l2, r2, pos2, theta2, phi2, clock2);
+        
+        //Vec field = pointField(new Vec(1, 0, 0.5), coil1, coil2);
+        //field.print();
         
         // Compute field
         Vec[][][] field = field(points, coil1, coil2);
@@ -111,7 +114,7 @@ public class Lab4Bonus {
     public static void output (Vec[][][] field, Vec[][][] points) {
         try {
         // write to Buyers.txt, appending to the end of the file if it exists, creating the file if it does not
-        PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("singlecoil7.csv", true)));
+        PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("onaxis.csv", true)));
         
         out.println("x,y,z,Bx,By,Bz");
         
